@@ -12,7 +12,7 @@ intents.message_content = True
 
 bot = commands.Bot(command_prefix='!', intents=intents)
 
-API_URL = "https://linkvertise-api.onrender.com"  # <- zamień na swój link po deployu
+API_URL = "https://linkvertise-api-1g6y.onrender.com"  # <- zamień na swój link po deployu
 
 @bot.command()
 async def short(ctx, url):

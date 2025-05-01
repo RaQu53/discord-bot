@@ -35,23 +35,6 @@ bot = commands.Bot(command_prefix='!', intents=intents)
 async def on_ready():
     print(f'Zalogowano jako {bot.user}')
 
-class CopyButton(View):
-    def __init__(self, link: str):
-        super().__init__()
-        self.link = link
-        
-        # Tworzymy przycisk
-        button = Button(label="Kopiuj link", style=discord.ButtonStyle.primary, emoji="📋")
-        button.callback = self.button_callback
-        self.add_item(button)
-    
-    async def button_callback(self, interaction: discord.Interaction):
-        # Ta funkcja zostanie wywołana po kliknięciu przycisku
-        try:
-            # Kopiujemy link do schowka użytkownika
-            await interaction.response.send_message(f"Link skopiowany do schowka: `{self.link}`", ephemeral=True)
-        except Exception as e:
-            await interaction.response.send_message(f"Wystąpił błąd: {str(e)}", ephemeral=True)
 
 @bot.event
 async def on_message(message):

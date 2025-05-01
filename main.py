@@ -39,6 +39,10 @@ async def on_message(message):
     if message.author == bot.user:
         return
 
+    # Sprawdź, czy wiadomość jest z kanału o określonym ID
+    if message.channel.id != 1359536602283770076:
+        return
+
     if message.content.startswith("http://") or message.content.startswith("https://"):
         try:
             monetized_link = lv_client.linkvertise(LINKVERTISE_ID, message.content)

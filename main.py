@@ -4,7 +4,6 @@ from discord.ext import commands
 from linkvertise import LinkvertiseClient
 from flask import Flask
 import threading
-from discord.ui import Button, View
 
 # 🔧 Minimalny serwer HTTP do zadowolenia Rendera
 app = Flask('')
@@ -35,7 +34,6 @@ bot = commands.Bot(command_prefix='!', intents=intents)
 async def on_ready():
     print(f'Zalogowano jako {bot.user}')
 
-
 @bot.event
 async def on_message(message):
     if message.author == bot.user:
@@ -48,15 +46,7 @@ async def on_message(message):
     if message.content.startswith("http://") or message.content.startswith("https://"):
         try:
             monetized_link = lv_client.linkvertise(LINKVERTISE_ID, message.content)
-            
-            # Tworzymy widok z przyciskiem
-            view = CopyButton(monetized_link)
-            
-            # Wysyłamy wiadomość z przyciskiem
-            await message.channel.send(
-                f"Oto Twój link z Linkvertise: {monetized_link}", 
-                view=view
-            )
+            await message.channel.send(f"Oto Twój link z Linkvertise: {monetized_link}")
         except Exception as e:
             await message.channel.send(f"Wystąpił błąd: {str(e)}")
 
